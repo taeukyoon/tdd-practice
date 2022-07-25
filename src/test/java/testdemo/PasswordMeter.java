@@ -7,6 +7,11 @@ public class PasswordMeter {
 			throw new IllegalArgumentException();
 		}
 
+		boolean length = pw.length() >= 8;
+		if (!length) {
+			return PasswordStrength.NOMAL;
+		}
+
 		return PasswordStrength.STRONG;
 	}
 }
