@@ -2,9 +2,11 @@ package testdemo;
 
 public class PasswordMeter {
 
-	public void meter(String pw) {
+	public PasswordStrength meter(String pw) {
 		if (pw == null || pw.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
+
+		return PasswordStrength.STRONG;
 	}
 }

@@ -22,4 +22,11 @@ public class PasswordMeterTest {
 		assertThatIllegalArgumentException()
 			.isThrownBy(() -> passwordMeter.meter(""));
 	}
+
+	@DisplayName("조건을 모두 충족하면 강함")
+	@Test
+	void MeetAllRules() {
+		PasswordStrength result = passwordMeter.meter("1Q23432wer");
+		assertThat(result).isEqualTo(PasswordStrength.STRONG);
+	}
 }
