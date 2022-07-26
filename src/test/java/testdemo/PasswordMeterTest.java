@@ -26,14 +26,26 @@ public class PasswordMeterTest {
 	@DisplayName("조건을 모두 충족하면 강함")
 	@Test
 	void meetAllRules() {
-		PasswordStrength result = passwordMeter.meter("1Q23432wer");
-		assertThat(result).isEqualTo(PasswordStrength.STRONG);
+		assertPasswordStrength("1Q23432wer", PasswordStrength.STRONG);
 	}
 
 	@DisplayName("길이가 8미만, 나머지 조건 만족")
 	@Test
 	void digitAndUpperCase() {
-		PasswordStrength result = passwordMeter.meter("1Q234");
-		assertThat(result).isEqualTo(PasswordStrength.NOMAL);
+		assertPasswordStrength("1Q234", PasswordStrength.NOMAL);
 	}
+
+	@DisplayName("대문자 없음, 나머지 조건 만족")
+	@Test
+	void digitAndLength() {
+		assertPasswordStrength("1q234wrewr", PasswordStrength.NOMAL);
+		assertPasswordStrength("1q234ww335", PasswordStrength.NOMAL);
+		assertPasswordStrength("1q234w4332235", PasswordStrength.NOMAL);
+	}
+
+	private void assertPasswordStrength(String pw, PasswordStrength expected) {
+		PasswordStrength result = passwordMeter.meter(pw);
+		assertThat(result).isEqualTo(expected);
+	}
+
 }
