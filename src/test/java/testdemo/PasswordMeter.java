@@ -8,16 +8,21 @@ public class PasswordMeter {
 		}
 
 		boolean lengthRule = pw.length() >= 8;
+		boolean containUp = containsUpperCase(pw);
+		boolean containNum = containNumber(pw);
+
+		if (lengthRule && !containNum && !containUp) {
+			return PasswordStrength.WEAK;
+		}
+
 		if (!lengthRule) {
 			return PasswordStrength.NOMAL;
 		}
 
-		boolean containUp = containsUpperCase(pw);
 		if (!containUp) {
 			return PasswordStrength.NOMAL;
 		}
 
-		boolean containNum = containNumber(pw);
 		if (!containNum) {
 			return PasswordStrength.NOMAL;
 		}

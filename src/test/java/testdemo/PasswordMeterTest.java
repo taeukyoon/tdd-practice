@@ -33,6 +33,8 @@ public class PasswordMeterTest {
 	@Test
 	void digitAndUpperCase() {
 		assertPasswordStrength("1Q234", PasswordStrength.NOMAL);
+		assertPasswordStrength("Q2334", PasswordStrength.NOMAL);
+		assertPasswordStrength("Q23234", PasswordStrength.NOMAL);
 	}
 
 	@DisplayName("대문자 없음, 나머지 조건 만족")
@@ -51,6 +53,13 @@ public class PasswordMeterTest {
 		assertPasswordStrength("BBcqqqqqqqq", PasswordStrength.NOMAL);
 	}
 
+	@DisplayName("길이만 충족")
+	@Test
+	void length() {
+		assertPasswordStrength("qweqeqewqrwq", PasswordStrength.WEAK);
+		assertPasswordStrength("retretetret", PasswordStrength.WEAK);
+		assertPasswordStrength("fksfklekwlqk", PasswordStrength.WEAK);
+	}
 
 	private void assertPasswordStrength(String pw, PasswordStrength expected) {
 		PasswordStrength result = passwordMeter.meter(pw);
