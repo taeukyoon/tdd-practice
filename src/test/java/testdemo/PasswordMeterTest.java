@@ -43,9 +43,17 @@ public class PasswordMeterTest {
 		assertPasswordStrength("1q234w4332235", PasswordStrength.NOMAL);
 	}
 
+	@DisplayName("숫자 없음, 나머지 조건 만족")
+	@Test
+	void lengthAndUpperCase() {
+		assertPasswordStrength("qweqQqwrkak", PasswordStrength.NOMAL);
+		assertPasswordStrength("BaSLsdawdw", PasswordStrength.NOMAL);
+		assertPasswordStrength("BBcqqqqqqqq", PasswordStrength.NOMAL);
+	}
+
+
 	private void assertPasswordStrength(String pw, PasswordStrength expected) {
 		PasswordStrength result = passwordMeter.meter(pw);
 		assertThat(result).isEqualTo(expected);
 	}
-
 }
