@@ -16,7 +16,7 @@ public class PasswordMeter {
 		if (containUp) metCount++;
 		if (containNum) metCount++;
 
-		if (metCount == 1) return PasswordStrength.WEAK;
+		if (metCount == 1 || metCount == 0) return PasswordStrength.WEAK;
 		if (metCount == 2) return PasswordStrength.NOMAL;
 
 		return PasswordStrength.STRONG;
