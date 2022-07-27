@@ -69,6 +69,14 @@ public class PasswordMeterTest {
 		assertPasswordStrength("QEfaa", PasswordStrength.WEAK);
 	}
 
+	@DisplayName("숫자만 충족")
+	@Test
+	void digit() {
+		assertPasswordStrength("a123", PasswordStrength.WEAK);
+		assertPasswordStrength("4s56", PasswordStrength.WEAK);
+		assertPasswordStrength("22d4", PasswordStrength.WEAK);
+	}
+
 	private void assertPasswordStrength(String pw, PasswordStrength expected) {
 		PasswordStrength result = passwordMeter.meter(pw);
 		assertThat(result).isEqualTo(expected);
