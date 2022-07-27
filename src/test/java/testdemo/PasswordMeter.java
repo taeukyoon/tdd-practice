@@ -11,9 +11,12 @@ public class PasswordMeter {
 		boolean containUp = containsUpperCase(pw);
 		boolean containNum = containNumber(pw);
 
-		if (lengthRule && !containNum && !containUp) {
-			return PasswordStrength.WEAK;
-		}
+		int metCount = 0;
+		if (lengthRule) metCount++;
+		if (containUp) metCount++;
+		if (containNum) metCount++;
+
+		if (metCount == 1) return PasswordStrength.WEAK;
 
 		if (!lengthRule) {
 			return PasswordStrength.NOMAL;
